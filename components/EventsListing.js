@@ -1,8 +1,10 @@
-
 import Link from 'next/link'
 import {EventsContext} from "../store/EventsContext";
 
 const EventsListing = ({staticData}) => {
+    // staticData only has a value during static rendering. In a normal
+    // browser request, staticData is undefined and this condition does
+    // not execute.
     if (staticData) {
         return  (<ul>
             {Object.keys(staticData).length === 0 && <h2>Loading!</h2>}
@@ -16,6 +18,12 @@ const EventsListing = ({staticData}) => {
 
     return (
         <EventsContext.Consumer>
+            {/* 👇 `value` is the value of EventsContext (the full events object)
+              It is available here because this is a `.Consumer` of the context.
+
+              Notice that we are not directly returning JSX, but a function with the
+              argument `value` that does the JSX returning.
+              */}
             {value =>
                 <ul>
                     {Object.keys(value).length === 0 && <h2>Loading...</h2>}

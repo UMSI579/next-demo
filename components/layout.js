@@ -59,6 +59,8 @@ export default function Layout({ children, home }) {
           </>
         )}
       </header>
+        {/* Wrapping this in EventsProvider allows every page to have *access* to the EventsContext
+          by then wrapping IT in a EventsContext.Consumer component. */}
         <EventsProvider>
             <main>{children}</main>
         </EventsProvider>
